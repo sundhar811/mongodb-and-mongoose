@@ -84,9 +84,17 @@ let Person = mongoose.model('Person', personSchema);
 //    ...do your stuff here...
 // });
 
-var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
+let person = new Person({
+    name: 'Joe Felix',
+    age: 30,
+    favoriteFoods: ['Fruits', 'Vegetables', 'Steak']
+  });
+
+const createAndSavePerson = function(done) {
+  person.save((err, data) => {
+    if (err) done(err);
+    else done(null, data);
+  })
 
 };
 
