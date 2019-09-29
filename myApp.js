@@ -84,13 +84,13 @@ let Person = mongoose.model('Person', personSchema);
 //    ...do your stuff here...
 // });
 
-let person = new Person({
-    name: 'Joe Felix',
-    age: 30,
-    favoriteFoods: ['Fruits', 'Vegetables', 'Steak']
-  });
-
 const createAndSavePerson = function(done) {
+  let person = new Person({
+      name: 'Joe Felix',
+      age: 30,
+      favoriteFoods: ['Fruits', 'Vegetables', 'Steak']
+    });
+  
   person.save((err, data) => {
     if (err) done(err);
     else done(null, data);
@@ -126,10 +126,11 @@ const createManyPeople = function(arrayOfPeople, done) {
 // It supports an extremely wide range of search options. Check it in the docs.
 // Use the function argument `personName` as search key.
 
-var findPeopleByName = function(personName, done) {
-  
-  done(null/*, data*/);
-
+const findPeopleByName = function(personName, done) {
+  Person.find({ name: personName }, (err, data) => {
+    if (err) done(err)
+    else done(null, data)
+  })  
 };
 
 /** 6) Use `Model.findOne()` */
