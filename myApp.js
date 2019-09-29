@@ -285,10 +285,17 @@ const removeManyPeople = function(done) {
 // Chain `.find()`, `.sort()`, `.limit()`, `.select()`, and then `.exec()`,
 // passing the `done(err, data)` callback to it.
 
-var queryChain = function(done) {
-  var foodToSearch = "burrito";
+const queryChain = function(done) {
+  let foodToSearch = "burrito";
   
-  done(null/*, data*/);
+  Person.find({ favoriteFoods: foodToSearch })
+        .sort({ name: 'asc' })
+        .limit(2)
+        .select('-age')
+        .exec((err, data) => {
+          if(err) done(err)
+          else done(null, data)
+        })
 };
 
 /** **Well Done !!**
