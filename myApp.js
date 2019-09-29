@@ -258,10 +258,13 @@ const removeById = function(personId, done) {
 // containing the outcome of the operation, and the number of items affected.
 // Don't forget to pass it to the `done()` callback, since we use it in tests.
 
-var removeManyPeople = function(done) {
-  var nameToRemove = "Mary";
+const removeManyPeople = function(done) {
+  let nameToRemove = "Mary";
 
-  done(null/*, data*/);
+  Person.remove({ name: nameToRemove}, (err, data) => {
+    if(err) done(err)
+    else done(null, data)
+  })
 };
 
 /** # C[R]UD part V -  More about Queries # 
