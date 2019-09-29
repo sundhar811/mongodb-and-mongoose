@@ -107,9 +107,11 @@ const createAndSavePerson = function(done) {
 // Create many people using `Model.create()`, using the function argument
 // 'arrayOfPeople'.
 
-var createManyPeople = function(arrayOfPeople, done) {
-    
-    done(null/*, data*/);
+const createManyPeople = function(arrayOfPeople, done) {
+    Person.create(arrayOfPeople, (err, data) => {
+      if (err) done(err)
+      else done(null, data)
+    })
     
 };
 
